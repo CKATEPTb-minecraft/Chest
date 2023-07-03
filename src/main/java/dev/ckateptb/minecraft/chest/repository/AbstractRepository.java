@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.experimental.Delegate;
 
-import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
 
 @Getter
@@ -20,10 +19,7 @@ public abstract class AbstractRepository<ENTITY, ID> implements Repository<ENTIT
     protected final ConnectionSource connection;
 
     @SneakyThrows
-    @SuppressWarnings("all")
-    public AbstractRepository() {
-        Class<ENTITY> entityClass = (Class<ENTITY>) ((ParameterizedType) this.getClass().getGenericSuperclass())
-                .getActualTypeArguments()[0];
+    public AbstractRepository(Class<ENTITY> entityClass) {
         this.connection = this.connect();
         TableUtils.createTableIfNotExists(this.connection, entityClass);
         this.dao = DaoManager.createDao(this.connection, entityClass);

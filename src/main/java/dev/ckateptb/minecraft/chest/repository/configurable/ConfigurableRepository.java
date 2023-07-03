@@ -14,8 +14,8 @@ public abstract class ConfigurableRepository<ENTITY, ID> implements Repository<E
     @Delegate
     private final Dao<ENTITY, ID> dao;
 
-    public ConfigurableRepository(String username, String password, String jdbcUrl) {
-        this.repository = new MySQLRepository<ENTITY, ID>() {
+    public ConfigurableRepository(Class<ENTITY> entityClass, String username, String password, String jdbcUrl) {
+        this.repository = new MySQLRepository<ENTITY, ID>(entityClass) {
             @Override
             protected String getUsername() {
                 return username;
@@ -34,8 +34,8 @@ public abstract class ConfigurableRepository<ENTITY, ID> implements Repository<E
         this.dao = this.repository.getDao();
     }
 
-    public ConfigurableRepository(Path path) {
-        this.repository = new SQLiteRepository<ENTITY, ID>() {
+    public ConfigurableRepository(Class<ENTITY> entityClass, Path path) {
+        this.repository = new SQLiteRepository<ENTITY, ID>(entityClass) {
             @Override
             public Path getPath() {
                 return path;

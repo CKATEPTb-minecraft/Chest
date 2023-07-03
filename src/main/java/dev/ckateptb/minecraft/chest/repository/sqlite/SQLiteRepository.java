@@ -9,6 +9,10 @@ import org.apache.commons.io.FileUtils;
 import java.nio.file.Path;
 
 public abstract class SQLiteRepository<ENTITY, ID> extends AbstractRepository<ENTITY, ID> {
+    public SQLiteRepository(Class<ENTITY> entityClass) {
+        super(entityClass);
+    }
+
     @Override
     @SneakyThrows
     public HikariDataSource createDatasource() {
