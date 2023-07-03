@@ -5,6 +5,10 @@ import com.zaxxer.hikari.HikariDataSource;
 import dev.ckateptb.minecraft.chest.repository.AbstractRepository;
 
 public abstract class MySQLRepository<ENTITY, ID> extends AbstractRepository<ENTITY, ID> {
+    public MySQLRepository(Class<ENTITY> entityClass) {
+        super(entityClass);
+    }
+
     @Override
     public HikariDataSource createDatasource() {
         HikariConfig hikariConfig = new HikariConfig();

@@ -4,3 +4,4 @@ main: '${projectMainClass}'
 api-version: 1.19
 authors: [ CKATEPTb ]
 description: Use SQLite, MySQL and even MongoDB inside Spigot in Entity <=> Repository mode.
+depend: [ Nicotine ]
