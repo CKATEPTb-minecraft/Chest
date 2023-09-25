@@ -1,5 +1,7 @@
 package dev.ckateptb.minecraft.chest;
 
+import com.j256.ormlite.logger.Level;
+import com.j256.ormlite.logger.Logger;
 import dev.ckateptb.common.tableclothcontainer.event.ComponentRegisterEvent;
 import dev.ckateptb.common.tableclothevent.EventBus;
 import dev.ckateptb.minecraft.chest.repository.Repository;
@@ -10,7 +12,9 @@ import java.util.Set;
 
 public class Chest extends JavaPlugin {
     private final Set<Runnable> executeOnDisable = new HashSet<>();
+
     public Chest() {
+        Logger.setGlobalLogLevel(Level.ERROR);
         EventBus.GLOBAL.registerEventHandler(ComponentRegisterEvent.class, event -> {
             Object instance = event.getInstance();
             if (instance instanceof Repository<?, ?> repository) {
